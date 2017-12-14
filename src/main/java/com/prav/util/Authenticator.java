@@ -21,9 +21,9 @@ public class Authenticator {
 	private Logger logger = Logger.getLogger(Authenticator.class);
 	
 	public void authenticate(MessageContext messageContext) {
-		Map header = (Map) messageContext.get(MessageContext.HTTP_REQUEST_HEADERS);
-		List userList = (List) header.get("Username");
-		List passList = (List) header.get("Password");
+		Map<String,List<String>> header = (Map<String, List<String>>) messageContext.get(MessageContext.HTTP_REQUEST_HEADERS);
+		List<String> userList = (List<String>) header.get("Username");
+		List<String> passList = (List<String>) header.get("Password");
 
 		String usernameReq = "";
 		String passwd = "";
