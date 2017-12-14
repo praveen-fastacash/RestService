@@ -1,11 +1,9 @@
 package com.prav.soap.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +34,12 @@ public class GcdListSoapImpl implements GcdListPort {
 	
 	@Override
 	public GcdListResponse gcdList(GcdRequest request) {
+		logger.debug("Gcd List request started");
 		authenticator.authenticate(webServiceContext.getMessageContext());
 		List<Numbers> numbers= daoService.selectValues();
 		GcdListResponse response = new GcdListResponse();
 		response.getGcdList().addAll(GcdUtil.calculateGcdList(numbers));
+		logger.debug("Gcd List request completed");
 		return response;
 	}
 

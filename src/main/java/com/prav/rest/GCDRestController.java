@@ -9,6 +9,7 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.Session;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -27,6 +28,8 @@ public class GCDRestController {
 	@Autowired
 	private ConnectionFactory connectionFactory;
 	private JmsTemplate jmsTemplate;
+	
+	private Logger logger = Logger.getLogger(GCDRestController.class);
 
 	@Autowired
 	GcdDaoService daoService;
@@ -38,6 +41,7 @@ public class GCDRestController {
 
 	@GetMapping("/pushdata")
 	public String push(@RequestParam final int i1, @RequestParam final int i2) {
+		logger.debug("Received push rest call");
 		jmsTemplate.send("inbound.queue", new MessageCreator() {
 			public Message createMessage(Session session) throws JMSException {
 				MapMessage message = session.createMapMessage();
@@ -46,11 +50,13 @@ public class GCDRestController {
 				return message;
 			}
 		});
+		logger.debug("Received and processes push rest call ");
 		return "OK";
 	}
 
 	@GetMapping("/getdata")
 	public List<Numbers> list() {
+		logger.debug("Received getdata rest request");
 		List<Numbers> numberList = daoService.selectValues();
 		return numberList;
 	}

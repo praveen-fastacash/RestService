@@ -10,8 +10,6 @@ import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.prav.soap.impl.GcdSumSoapImpl;
-
 @Component
 public class Authenticator {
 	@Value("${secure.user}")

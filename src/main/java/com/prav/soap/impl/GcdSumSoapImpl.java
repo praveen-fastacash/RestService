@@ -1,18 +1,12 @@
 package com.prav.soap.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
 
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.apache.log4j.Logger;
-import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.prav.dao.model.Numbers;
